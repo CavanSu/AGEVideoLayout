@@ -539,7 +539,6 @@ private extension AGELayoutView {
                 return
         }
         
-        // 已经能获得准确的 view size
         #if os(iOS)
         let maxX = (contentSize.width - bounds.width) > 0 ? contentSize.width - bounds.width : 0
         let maxY = (contentSize.height - bounds.height) > 0 ? contentSize.height - bounds.height : 0

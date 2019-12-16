@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "AGEVideoLayout"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "A Great Evolution VideoLayout."
 
   # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "VideoLayout"
+  s.description  = "You can use AGEVideoLayout to achieve the video views layout you want."
 
   s.homepage     = "https://github.com/CavanSu/AGEVideoLayout"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -133,5 +133,8 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
+
+  s.module_name   = 'AGEVideoLayout'
+  s.swift_version = '4.0'
 
 end
