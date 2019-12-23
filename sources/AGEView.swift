@@ -13,25 +13,21 @@ import Cocoa
 #endif
 
 #if os(iOS)
-typealias AGEView = UIView
-typealias AGEColor = UIColor
-typealias AGESize = CGSize
-typealias AGEScroll = UIScrollView
-typealias AGERect = CGRect
+public typealias AGEView = UIView
+public typealias AGEColor = UIColor
+public typealias AGESize = CGSize
+public typealias AGEScroll = UIScrollView
+public typealias AGERect = CGRect
 #else
-typealias AGEView = NSView
-typealias AGEColor = NSColor
-typealias AGESize = NSSize
-typealias AGEScroll = NSScrollView
-typealias AGERect = NSRect
+public typealias AGEView = NSView
+public typealias AGEColor = NSColor
+public typealias AGESize = NSSize
+public typealias AGEScroll = NSScrollView
+public typealias AGERect = NSRect
 #endif
 
-extension AGEView {
+public extension AGEView {
     #if os(macOS)
-    func layoutIfNeeded() {
-        self.layoutSubtreeIfNeeded()
-    }
-    
     var backgroundColor: AGEColor {
         set {
             if self.layer == nil {
@@ -53,6 +49,14 @@ extension AGEView {
                 return AGEColor.clear
             }
         }
+    }
+    #endif
+}
+
+extension AGEView {
+    #if os(macOS)
+    func layoutIfNeeded() {
+        self.layoutSubtreeIfNeeded()
     }
     #endif
 }

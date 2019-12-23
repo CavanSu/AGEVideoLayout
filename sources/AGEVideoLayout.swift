@@ -12,27 +12,26 @@ import UIKit
 import Cocoa
 #endif
 
-struct AGEIndex {
-    var level: Int
-    var item: Int
+public struct AGEIndex {
+    public var level: Int
+    public var item: Int
     
-    var description: String {
+    public var description: String {
         return "level: \(level), item: \(item)"
     }
 }
 
-struct AGERankRow {
-    var ranks: Int
-    var rows: Int
+public struct AGERankRow {
+    public var ranks: Int
+    public var rows: Int
 }
 
-struct AGEVideoLayout {
-    
-    enum Direction {
+public struct AGEVideoLayout {
+    public enum Direction {
         case vertical, horizontal
     }
     
-    enum ScrollType {
+    public enum ScrollType {
         case `static`
         case scroll(Direction)
         
@@ -80,7 +79,7 @@ struct AGEVideoLayout {
         }
     }
     
-    enum ConstraintsType {
+    public enum ConstraintsType {
         case scale(CGSize), constant(CGSize)
         
         fileprivate var rawValue: Int {
@@ -126,16 +125,16 @@ struct AGEVideoLayout {
         }
     }
     
-    var interitemSpacing: CGFloat
-    var lineSpacing: CGFloat
+    public var interitemSpacing: CGFloat
+    public var lineSpacing: CGFloat
     
-    var startPoint: CGPoint
-    var scrollType: ScrollType
-    var itemSize: ConstraintsType
-    var size: ConstraintsType
-    var level: Int
+    public var startPoint: CGPoint
+    public var scrollType: ScrollType
+    public var itemSize: ConstraintsType
+    public var size: ConstraintsType
+    public var level: Int
     
-    init(interitemSpacing: CGFloat = 0,
+    public init(interitemSpacing: CGFloat = 0,
          lineSpacing: CGFloat = 0,
          startPoint: CGPoint = CGPoint.zero,
          size: ConstraintsType = .scale(CGSize(width: 1, height: 1)),
@@ -165,7 +164,9 @@ struct AGEVideoLayout {
             self.itemSize = itemSize
         }
     }
-    
+}
+
+public extension AGEVideoLayout {
     func scrollType(_ type: ScrollType) -> AGEVideoLayout {
         var new = self
         new.scrollType = type

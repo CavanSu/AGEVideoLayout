@@ -35,6 +35,8 @@ extension AGESegmentedControl {
 }
 #endif
 
+import AGEVideoLayout
+
 class ViewController: AGEViewController {
     
     @IBOutlet weak var containerView: AGEVideoContainer!
@@ -73,7 +75,6 @@ class ViewController: AGEViewController {
         totalViews.append(fView)
         
         containerView.delegate = self
-        containerView.setup(logLevel: .all)
         
         test0()
     }
@@ -131,7 +132,6 @@ class ViewController: AGEViewController {
         addButton.isHidden = hidden
         deleteButton.isHidden = hidden
     }
-    
     
     #if os(macOS)
     func configStyle(of window: NSWindow) {

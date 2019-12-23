@@ -12,26 +12,25 @@ import UIKit
 import Cocoa
 #endif
 
-protocol AGEVideoContainerDataSource: NSObjectProtocol {
+public protocol AGEVideoContainerDataSource: NSObjectProtocol {
     func container(_ container: AGEVideoContainer, numberOfItemsIn level: Int) -> Int
     func container(_ container: AGEVideoContainer, viewForItemAt index: AGEIndex) -> AGEView
 }
 
-protocol AGEVideoContainerDelegate: NSObjectProtocol {
+public protocol AGEVideoContainerDelegate: NSObjectProtocol {
     func container(_ container: AGEVideoContainer, didSelected itemView: AGEView, index: AGEIndex)
     func container(_ container: AGEVideoContainer, itemWillDisplay index: AGEIndex)
     func container(_ container: AGEVideoContainer, itemDidHidden index: AGEIndex)
 }
 
-extension AGEVideoContainerDelegate {
+public extension AGEVideoContainerDelegate {
     func container(_ container: AGEVideoContainer, didSelected itemView: AGEView, index: AGEIndex) {}
     func container(_ container: AGEVideoContainer, itemWillDisplay index: AGEIndex) {}
     func container(_ container: AGEVideoContainer, itemDidHidden index: AGEIndex) {}
 }
 
-class AGEVideoContainer: AGEView {
-    
-    class AGELog: NSObject {
+public class AGEVideoContainer: AGEView {
+    public class AGELog: NSObject {
         static var currentNeedLog: LogType? = nil
         
         static var separator: String = "----------------"
@@ -111,9 +110,9 @@ class AGEVideoContainer: AGEView {
         }
     }
     
-    typealias ListCountBlock = ((_ level: Int) -> Int)?
-    typealias ListItemBlock = ((_ index: AGEIndex) -> AGEView)?
-    typealias ListRankRowBlock = ((_ level: Int) -> AGERankRow)?
+    public typealias ListCountBlock = ((_ level: Int) -> Int)?
+    public typealias ListItemBlock = ((_ index: AGEIndex) -> AGEView)?
+    public typealias ListRankRowBlock = ((_ level: Int) -> AGERankRow)?
     
     private lazy var levels = [Int: AGELevelItem]()
     private var eventsObserver = AGEEventsObserver()
@@ -125,11 +124,11 @@ class AGEVideoContainer: AGEView {
     
     private let animationTime: TimeInterval = 0.3
     
-    weak var dataSource: AGEVideoContainerDataSource?
-    weak var delegate: AGEVideoContainerDelegate?
+    public weak var dataSource: AGEVideoContainerDataSource?
+    public weak var delegate: AGEVideoContainerDelegate?
     
     #if os(macOS)
-    override func viewDidMoveToWindow() {
+    override open func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
         addEventsObserver()
     }
@@ -151,7 +150,7 @@ class AGEVideoContainer: AGEView {
     #endif
 }
 
-extension AGEVideoContainer {
+public extension AGEVideoContainer {
     func reload(level: Int, animated: Bool = false) {
         guard let levelItem = levels[level] else {
             return
@@ -243,10 +242,6 @@ extension AGEVideoContainer {
         levels.removeValue(forKey: level)
     }
     
-    func setup(logLevel: AGELog.LogType) {
-        AGEVideoContainer.AGELog.currentNeedLog = logLevel
-    }
-    
     @discardableResult func listCount(_ block: ListCountBlock) -> AGEVideoContainer {
         self.listCount = block
         return self
@@ -259,6 +254,10 @@ extension AGEVideoContainer {
 }
 
 private extension AGEVideoContainer {
+    func setup(logLevel: AGELog.LogType) {
+        AGEVideoContainer.AGELog.currentNeedLog = logLevel
+    }
+    
     func updateSingalLayout(_ layout: AGEVideoLayout, animated: Bool = false) {
         if let levelItem = levels[layout.level] {
             let oldLayout = levelItem.layout
@@ -458,7 +457,7 @@ private extension AGEVideoContainer {
 
 #if os(iOS)
 extension AGEVideoContainer: UIGestureRecognizerDelegate {
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         let position = gestureRecognizer.location(in: self)
        
         findSelectedViewCommonSteps(with: AGEEvent(),
