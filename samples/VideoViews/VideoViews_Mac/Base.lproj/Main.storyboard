@@ -710,7 +710,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="780" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="eD6-Sk-s4L" customClass="AGEVideoContainer" customModule="VideoViews_Mac" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="eD6-Sk-s4L" customClass="AGEVideoContainer" customModule="AGEVideoLayout">
                                 <rect key="frame" x="0.0" y="50" width="780" height="335"/>
                             </customView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CbA-nb-LM7">
@@ -768,7 +768,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="Sba-se-IXt" id="pJa-y8-gAU"/>
-                        <outlet property="containerView" destination="eD6-Sk-s4L" id="nqa-t4-ja3"/>
+                        <outlet property="containerView" destination="eD6-Sk-s4L" id="i9d-bF-WIx"/>
                         <outlet property="deleteButton" destination="b25-JV-cTv" id="DCX-GD-1wn"/>
                     </connections>
                 </viewController>
