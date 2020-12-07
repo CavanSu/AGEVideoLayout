@@ -161,7 +161,7 @@ public extension AGEVideoContainer {
         let itemsConstraints = layoutView.update(itemViews: levelItem.layout)
         
         if let olds = levelItem.itemsConstraints {
-            NSLayoutConstraint.deactivate(olds)
+            privateRemoveConstraints(olds)
         }
         
         if let news = itemsConstraints {
@@ -232,9 +232,9 @@ public extension AGEVideoContainer {
         guard let levelItem = levels[level] else {
            return
         }
-        NSLayoutConstraint.deactivate(levelItem.layoutConstraints)
+        privateRemoveConstraints(levelItem.layoutConstraints)
         if let itemsConstraints = levelItem.itemsConstraints {
-            NSLayoutConstraint.deactivate(itemsConstraints)
+           privateRemoveConstraints(itemsConstraints)
         }
         let layoutView = levelItem.viewType.view
         layoutView.removeAllItemViews()
@@ -284,7 +284,7 @@ private extension AGEVideoContainer {
                     layoutView.removeAllItemViews()
                                         
                     if let olds = levelItem.itemsConstraints {
-                        NSLayoutConstraint.deactivate(olds)
+                        privateRemoveConstraints(olds)
                         AGELog.log("old itemsConstraints count: \(olds.count)", type: .updateLayoutConstraints)
                     }
                     
@@ -300,7 +300,7 @@ private extension AGEVideoContainer {
                                           .size]) {
                     
                     let olds = levelItem.layoutConstraints
-                    NSLayoutConstraint.deactivate(olds)
+                    privateRemoveConstraints(olds)
                     
                     let layoutConstraints = updateLayoutViewConstraints(layoutView, layout: layout)
                     levelItem.layoutConstraints = layoutConstraints
@@ -625,5 +625,19 @@ extension AGEVideoContainer: AGELayoutViewDelegate {
         let ageIndex = AGEIndex(level: layoutView.level, item: index)
         delegate?.container(self, itemDidHidden: ageIndex)
         AGELog.log("itemViewDidHidden: \(ageIndex)", type: .willHiddenItemView)
+    }
+}
+
+fileprivate extension AGEView {
+    func privateRemoveConstraints(_ constraints: [NSLayoutConstraint]) {
+        #if os(iOS)
+        if #available(iOS 10.0 , *) {
+            NSLayoutConstraint.deactivate(constraints)
+        } else {
+            removeConstraints(constraints)
+        }
+        #else
+        NSLayoutConstraint.deactivate(constraints)
+        #endif
     }
 }
